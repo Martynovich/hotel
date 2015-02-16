@@ -157,7 +157,12 @@ public class ClientDao implements IClientDao {
         for(Client client: list){
             LOGGER.info(client);
         }*/
+
+        class Dog{}
+
         Client client = new ClientDao().read(5);
         System.out.println(client.getId() + client.getLogin() + client.getSurname());
+        LinkedList<String> list = new LinkedList<>();
+        new TreeSet<Dog>();
     }
 }

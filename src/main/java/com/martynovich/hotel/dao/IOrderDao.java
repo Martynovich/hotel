@@ -17,4 +17,6 @@ public interface IOrderDao {
     void remove(long id);
 
     List<Order> readAll();
+
+    void kill();
 }
