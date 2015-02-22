@@ -18,4 +18,6 @@ public interface IApartmentDao {
     void remove(long id);
 
     List<Apartment> readAll();
+
+    List<Apartment> readFreeRooms();
 }

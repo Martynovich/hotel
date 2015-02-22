@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="MySQL - @localhost" uuid="b19e0154-5a03-4441-8c8e-30cefff717cf">
+  <data-source source="LOCAL" name="MySQL - @localhost" uuid="f4ee29bb-c22e-41cc-87d8-794ecc284cd2">
     <database-info product="MySQL" version="5.5.23" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
@@ -27,7 +27,7 @@
       <column name="price" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="level" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="order_ibfk_2" table="order" schema="" catalog="hotel" columns="apartment_id_fk"/>
+      <exported-key name="orders_ibfk_2" table="orders" schema="" catalog="hotel" columns="apartment_id_fk"/>
       <index name="unique_id" unique="true" columns="id"/>
       <index name="unique_number" unique="true" columns="number"/>
     </table>
@@ -40,19 +40,19 @@
       <column name="phone" sqlType="VARCHAR" length="40" precision="0" nullable="false" jdbcType="12"/>
       <column name="email" sqlType="VARCHAR" length="40" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <exported-key name="order_ibfk_1" table="order" schema="" catalog="hotel" columns="client_id_fk"/>
+      <exported-key name="orders_ibfk_1" table="orders" schema="" catalog="hotel" columns="client_id_fk"/>
       <index name="unique_id" unique="true" columns="id"/>
       <index name="unique_login" unique="true" columns="login"/>
     </table>
-    <table name="order" schema="" catalog="hotel" type="TABLE">
+    <table name="orders" schema="" catalog="hotel" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="client_id_fk" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="apartment_id_fk" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="start_date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91"/>
       <column name="end_date" sqlType="DATE" length="10" precision="0" nullable="false" jdbcType="91"/>
       <primary-key name="PRIMARY" columns="id"/>
-      <foreign-key name="order_ibfk_1" columns="client_id_fk" ref-table="clients" ref-schema="" ref-catalog="hotel" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
-      <foreign-key name="order_ibfk_2" columns="apartment_id_fk" ref-table="apartments" ref-schema="" ref-catalog="hotel" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="orders_ibfk_1" columns="client_id_fk" ref-table="clients" ref-schema="" ref-catalog="hotel" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="orders_ibfk_2" columns="apartment_id_fk" ref-table="apartments" ref-schema="" ref-catalog="hotel" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
       <index name="unique_id" unique="true" columns="id"/>
     </table>
     <table name="CHARACTER_SETS" schema="" catalog="information_schema" type="SYSTEM VIEW">

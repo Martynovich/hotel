@@ -24,6 +24,7 @@ public class ApartmentDao implements IApartmentDao {
                     "SET number = ?, rooms = ?, free = ?, price = ?, level = ? WHERE id = ?;";
     private static final String DELETE_QUERY = "DELETE FROM hotel.apartments WHERE id = ?";
     private static final String READ_ALL_QUERY = "SELECT * FROM hotel.apartments";
+    private static final String READ_FREE_ROOMS_QUERY = "SELECT * FROM hotel.apartments WHERE free = 1";
 
     public ApartmentDao(){
         this.connectionPoint = ConnectionPoint.getInstance();
@@ -37,7 +38,7 @@ public class ApartmentDao implements IApartmentDao {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
             preparedStatement.setShort(1, apartment.getNumber());
             preparedStatement.setByte(2, apartment.getRooms());
-            preparedStatement.setBoolean(3, apartment.isFree());
+            preparedStatement.setBoolean(3, apartment.getFree());
             preparedStatement.setShort(4, apartment.getPrice());
             preparedStatement.setByte(5, apartment.getLevel());
             preparedStatement.execute();
@@ -74,7 +75,7 @@ public class ApartmentDao implements IApartmentDao {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUERY);
             preparedStatement.setShort(1, apartment.getNumber());
             preparedStatement.setByte(2, apartment.getRooms());
-            preparedStatement.setBoolean(3, apartment.isFree());
+            preparedStatement.setBoolean(3, apartment.getFree());
             preparedStatement.setShort(4, apartment.getPrice());
             preparedStatement.setByte(5, apartment.getLevel());
             preparedStatement.setLong(6, apartment.getId());
@@ -118,15 +119,36 @@ public class ApartmentDao implements IApartmentDao {
         return apartmentList;
     }
 
-    public static void main(String[] args) {
-        List<Apartment> list = new ApartmentDao().readAll();
-            for(Apartment a : list) {
-                System.out.print(a.getId() + " ");
-                System.out.print(a.getNumber() + " ");
-                System.out.print(a.getRooms() + " ");
-                System.out.print(a.isFree() + " ");
-                System.out.print(a.getPrice() + " ");
-                System.out.println(a.getLevel());
+    @Override
+    public List<Apartment> readFreeRooms() {
+        List<Apartment> apartmentList = new ArrayList<Apartment>();
+        Apartment apartment;
+        try(Connection connection = connectionPoint.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(READ_FREE_ROOMS_QUERY);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                apartment = new Apartment();
+                apartment.setId(resultSet.getInt("id"));
+                apartment.setNumber(resultSet.getShort("number"));
+                apartment.setRooms(resultSet.getByte("rooms"));
+                apartment.setFree(resultSet.getBoolean("free"));
+                apartment.setPrice(resultSet.getShort("price"));
+                apartment.setLevel(resultSet.getByte("level"));
+                apartmentList.add(apartment);
             }
+        } catch (SQLException e) {
+            LOGGER.error("SQL troubles with apartment readingFreeRooms", e);
+        }
+        return apartmentList;
     }
+
+    /*public static void main(String[] args) {
+        List<Apartment> a = new ApartmentDao().readFreeRooms();
+        for(Apartment b : a){
+            System.out.print(b.getId() + b.getNumber() + b.getRooms()+
+                    String.valueOf(b.isFree()) + b.getPrice() + b.getLevel());
+            System.out.println();
+        }
+
+    }*/
 }

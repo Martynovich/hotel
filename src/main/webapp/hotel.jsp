@@ -14,6 +14,7 @@
        <h1>Welcome!</h1>
 
         <form action="/hotel" method="post">
+            <input type="hidden" name="command" value="login" />
             Login
             <input id="login" type="text" name="login"> </br>
             Password

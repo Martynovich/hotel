@@ -15,6 +15,7 @@ public class ConnectionPoint {
     private static ConnectionPoint instance;
     final static Logger LOGGER = Logger.getLogger(ConnectionPoint.class);
     private Connection connection;
+    private static final String DRIVER_MYSQL = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/hotel";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
@@ -30,11 +31,10 @@ public class ConnectionPoint {
 
     public Connection getConnection() {
         try {
-            Driver driver = new FabricMySQLDriver();
-            DriverManager.registerDriver(driver);
+            Class.forName(DRIVER_MYSQL);
             connection = DriverManager.getConnection(URL,USERNAME,PASSWORD);
                         LOGGER.info("Connection created");
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return connection;

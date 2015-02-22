@@ -35,7 +35,7 @@ public class Apartment {
         this.rooms = rooms;
     }
 
-    public boolean isFree() {
+    public boolean getFree() {
         return free;
     }
 

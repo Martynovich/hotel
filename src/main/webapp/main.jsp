@@ -11,6 +11,11 @@
        <title>Hotel</title>
     </head>
     <body>
-       Hello, ${clintLogin}! Your password is: ${pass}
+       Hello my friend! Your login is ${clintLogin}! Your password is: ${pass}
+       <form action="/hotel" method="post">
+           <input type="hidden" name="command" value="free_rooms" />
+           Get free rooms:</br>
+           <input type="submit" value="Get free rooms">
+       </form>
     </body>
 </html>

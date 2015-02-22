@@ -147,7 +147,7 @@ public class ClientDao implements IClientDao {
         return clientList;
     }
 
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
         /*Client client = new Client();
         client.setId(5);client.setLogin("Padla");client.setPassword("555");client.setName("Padla");
         client.setSurname("Loh");client.setPhone("25674");client.setEmail("shlyocik@com.ua");
@@ -158,11 +158,8 @@ public class ClientDao implements IClientDao {
             LOGGER.info(client);
         }*/
 
-        class Dog{}
+        //Client client = new ClientDao().read("Oleg");
+        //System.out.println(client.getId() + client.getLogin() + client.getSurname());
 
-        Client client = new ClientDao().read(5);
-        System.out.println(client.getId() + client.getLogin() + client.getSurname());
-        LinkedList<String> list = new LinkedList<>();
-        new TreeSet<Dog>();
-    }
+    //}
 }
