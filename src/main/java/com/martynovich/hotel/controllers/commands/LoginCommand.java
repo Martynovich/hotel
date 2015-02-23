@@ -7,7 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @author
@@ -19,12 +18,9 @@ public class LoginCommand implements Command {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String page = null;
-//извлечение из запроса логина и пароля
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
-//проверка логина и пароля
         if (checkLogin(login, pass)) {
-//определение пути к main.jsp
             page = "main.jsp";
             request.getSession().setAttribute("clintLogin", login);
             request.setAttribute("pass", pass);

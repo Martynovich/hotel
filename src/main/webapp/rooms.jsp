@@ -10,27 +10,36 @@
 <html>
 <head>
     <title>Rooms</title>
+    <script>
+        var submitForm = function(id) {
+            document.getElementById("userInput").innerHTML = '<input type="hidden" name="roomId" value="'+ id +'">';
+            document.getElementById("roomForm").submit();
+        }
+    </script>
 </head>
 <body>
-<table>
-    <tr>
-        <td>Apartment ID</td>
-        <td>Apartment number</td>
-        <td>Apartment rooms</td>
-        <td>Apartment free</td>
-        <td>Apartment price</td>
-        <td>Apartment stars</td>
-    </tr>
-    <c:forEach var="room" items="${freeRooms}">
+<form action="/hotel" id="roomForm">
+    <table>
         <tr>
-            <td>${room.id}</td>
-            <td>${room.number}</td>
-            <td>${room.rooms}</td>
-            <td>${room.free}</td>
-            <td>${room.price}</td>
-            <td>${room.level}</td>
+            <td>Apartment number</td>
+            <td>Apartment rooms</td>
+            <td>Apartment free</td>
+            <td>Apartment price</td>
+            <td>Apartment stars</td>
         </tr>
-    </c:forEach>
-</table>
+        <c:forEach var="room" items="${freeRooms}">
+            <tr onclick="submitForm(${room.id})">
+                <td>${room.number}</td>
+                <td>${room.rooms}</td>
+                <td>${room.free}</td>
+                <td>${room.price}</td>
+                <td>${room.level}</td>
+            </tr>
+            <%--<input type="hidden" name="roomId" value="${room.id}">--%>
+        </c:forEach>
+        <input type="hidden" name="command" value="apartment"/>
+        <span id="userInput"></span>
+    </table>
+</form>
 </body>
 </html>
